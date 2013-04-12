@@ -1115,7 +1115,9 @@ VerifyEmptyDirectory(d)
     struct stat dstat;
     DIR *dir;
     struct dirent *de;
+#if 0 /* See below */
     STRING *path = (STRING *)0;
+#endif
     int retval = 0;
 
     while (1) {
@@ -1181,8 +1183,13 @@ VerifyEmptyDirectory(d)
 #endif
     }
 
+#if 0 /* See above */
     if (path != (STRING *)0)
 	DestroyString(path);
+#endif
+
+    /* free dir data structure */
+    closedir(dir);
 
     return retval;
 }
